@@ -13,3 +13,7 @@ function addTheme() {
     }).then(r => r.json());
     window.location.replace("http://localhost:9999/");
 }
+
+function sendComment() {
+
+}

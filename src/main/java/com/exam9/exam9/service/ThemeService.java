@@ -20,4 +20,11 @@ public class ThemeService {
         themeRepository.save(theme);
     }
 
+    public boolean existbyId(Long id) {
+        return themeRepository.existsById(id);
+    }
+
+    public Theme findById(Long id) {
+        return themeRepository.findById(id).get();
+    }
 }

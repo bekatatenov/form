@@ -1,5 +1,6 @@
 package com.exam9.exam9.Utils;
 
+import com.exam9.exam9.model.Comment;
 import com.exam9.exam9.model.Theme;
 import com.exam9.exam9.model.User;
 import com.exam9.exam9.repository.CommentRepository;
@@ -38,7 +39,31 @@ public class PreloadData {
             List<Theme> themes = makeThemes(users);
             themeRepository.saveAll(themes);
 
+            List<Comment> comments = makeComments(users, themes, themeRepository);
+            commentRepository.saveAll(comments);
+
+
         };
+    }
+
+    private List<Comment> makeComments(List<User> users, List<Theme> themes, ThemeRepository themeRepository) {
+        List<Comment> comments = new ArrayList<>();
+        Random rnd = new Random();
+        for (Theme t :
+                themes) {
+            for (int i = 0; i < 40; i++) {
+                comments.add(Comment.builder()
+                        .text("CommentTest" + i)
+                        .time(LocalDateTime.now())
+                        .user(users.get(rnd.nextInt(4) + 1))
+                        .theme(t)
+                        .build());
+                t.setQty(t.getQty() + 1);
+                themeRepository.save(t);
+            }
+        }
+        return comments;
+
     }
 
     private List<Theme> makeThemes(List<User> users) {

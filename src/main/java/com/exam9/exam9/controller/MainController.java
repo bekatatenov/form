@@ -1,9 +1,12 @@
 package com.exam9.exam9.controller;
 
 
+import com.exam9.exam9.exception.ResourceNotFoundException;
 import com.exam9.exam9.form.FormConfirm;
 import com.exam9.exam9.form.RegisterForm;
+import com.exam9.exam9.model.Comment;
 import com.exam9.exam9.model.Theme;
+import com.exam9.exam9.model.User;
 import com.exam9.exam9.service.CommentService;
 import com.exam9.exam9.service.ThemeService;
 import com.exam9.exam9.service.UserService;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -73,5 +77,27 @@ public class MainController {
         }
         userService.register(form);
         return "redirect:/login";
+    }
+
+    @GetMapping("/theme/{id}")
+    public String showTheme(@RequestParam(defaultValue = "1") Integer page, @PathVariable Long id, Model model, Principal principal) {
+        if (!themeService.existbyId(id)) {
+            throw new ResourceNotFoundException("There is such Theme with id", id);
+        }
+        Theme byId = themeService.findById(id);
+        model.addAttribute("theme", byId);
+
+        if (principal != null) {
+            if (userService.existByEmail(principal.getName())) {
+                model.addAttribute("user", userService.findByEmail(principal.getName()));
+            }
+        }
+
+        Page<Comment> comment = commentService.findByThemeId(id, PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "time")));
+        model.addAttribute("comments", comment.getContent());
+        model.addAttribute("pages", comment.getTotalPages() - 1);
+        model.addAttribute("page", page);
+        model.addAttribute("lastPage", comment.getTotalPages() - 1);
+        return "showtheme";
     }
 }

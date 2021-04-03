@@ -28,7 +28,7 @@
                             <textarea class="form-control" name="text" id="message-text"></textarea>
                         </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" onclick="addTheme()" class="btn btn-primary">Crete Theme</button>
+                        <button onclick=" addTheme()" class="btn btn-primary">Crete Theme</button>
                     </form>
                 </div>
             </div>

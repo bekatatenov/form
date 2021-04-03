@@ -15,4 +15,8 @@ public class CommentService {
     public Page<Comment> findByThemeId(Long id, Pageable pageable) {
         return commentRepository.findAllByTheme_Id(id, pageable);
     }
+
+    public void save(Comment comment) {
+        commentRepository.save(comment);
+    }
 }

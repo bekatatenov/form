@@ -43,12 +43,11 @@ public class MainController {
         }
         var uri = uriBuilder.getRequestURI();
 
-
         Page<Theme> chats = themeService.findAllThemes(PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "time")));
         model.addAttribute("themes", chats.getContent());
-        model.addAttribute("pages", chats.getTotalPages() - 1);
+        model.addAttribute("pages", chats.getTotalPages());
         model.addAttribute("page", page);
-        model.addAttribute("lastPage", chats.getTotalPages() - 1);
+        model.addAttribute("lastPage", chats.getTotalPages());
         return "index";
     }
 
@@ -93,11 +92,11 @@ public class MainController {
             }
         }
 
-        Page<Comment> comment = commentService.findByThemeId(id, PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.DESC, "time")));
+        Page<Comment> comment = commentService.findByThemeId(id, PageRequest.of(page - 1, 10, Sort.by(Sort.Direction.ASC, "time")));
         model.addAttribute("comments", comment.getContent());
-        model.addAttribute("pages", comment.getTotalPages() - 1);
+        model.addAttribute("pages", comment.getTotalPages());
         model.addAttribute("page", page);
-        model.addAttribute("lastPage", comment.getTotalPages() - 1);
+        model.addAttribute("lastPage", comment.getTotalPages());
         return "showtheme";
     }
 }

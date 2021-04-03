@@ -19,13 +19,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="form-theme">
+                    <form id="form-comment">
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Text:</label>
                             <textarea class="form-control" name="text" id="message-text"></textarea>
                         </div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" onclick="sendComment()" class="btn btn-primary">Send Comment</button>
+                        <button type="submit" onclick="sendComment(${theme.id})" class="btn btn-primary">Send Comment
+                        </button>
                     </form>
                 </div>
             </div>
@@ -55,23 +56,25 @@
             </#list>
         </div>
 
-        <div class="d-flex justify-content-between w-50 mx-auto">
-            <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
-                <#if page!=1>
-                    <a class="pageButton" style="color: black; text-align: center" href="?page=${page-1}"><<</a>
-                </#if>
+        <#if 1<lastPage>
+            <div class="d-flex justify-content-between w-50 mx-auto">
+                <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
+                    <#if page!=1>
+                        <a class="pageButton" style="color: black; text-align: center" href="?page=${page-1}"><<</a>
+                    </#if>
+                </div>
+                <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
+                    <#list 1..pages as x>
+                        <a class="pageButton" style="color: black; text-align: center" href="?page=${x}">${x}</a>
+                    </#list>
+                </div>
+                <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
+                    <#if lastPage != page>
+                        <a class="pageButton" style="color: black; text-align: center" href="?page=${page+1}">>></a>
+                    </#if>
+                </div>
             </div>
-            <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
-                <#list 1..pages as x>
-                    <a class="pageButton" style="color: black; text-align: center" href="?page=${x}">${x}</a>
-                </#list>
-            </div>
-            <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
-                <#if lastPage != page>
-                    <a class="pageButton" style="color: black; text-align: center" href="?page=${page+1}">>></a>
-                </#if>
-            </div>
-        </div>
+        </#if>
     </div>
 
 </@main.renderWith>

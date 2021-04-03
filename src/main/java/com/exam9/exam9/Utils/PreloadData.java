@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +50,7 @@ public class PreloadData {
         Random rnd = new Random();
         for (Theme t :
                 themes) {
-            for (int i = 0; i < 40; i++) {
+            for (int i = 0; i < 12; i++) {
                 comments.add(Comment.builder()
                         .text("CommentTest" + i)
                         .time(LocalDateTime.now())
@@ -69,7 +68,7 @@ public class PreloadData {
     private List<Theme> makeThemes(List<User> users) {
         Random rnd = new Random();
         List<Theme> themes = new ArrayList<>();
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 20; i++) {
             themes.add(Theme.builder()
                     .name("Theme" + i)
                     .qty(0)
@@ -88,7 +87,7 @@ public class PreloadData {
             users.add(User.builder()
                     .email("test@gmail" + i)
                     .password(passwordEncoder.encode("test123123"))
-                    .name("test" + i)
+                    .name("user" + i)
                     .build());
         }
         return users;

@@ -42,9 +42,9 @@
                 List Of Themes
             </a>
             <div class="list-group-item list-group-item-action list-group-item-info d-flex justify-content-between">
-                <p style="padding: 0 5px">Author</p>
+                <p style="padding: 0 5px">Name</p>
                 <p style="padding: 0 5px">Time</p>
-                <p style="padding: 0 5px">Email</p>
+                <p style="padding: 0 5px">User</p>
                 <p style="padding: 0 5px">QTY</p>
             </div>
             <#list themes as theme>
@@ -58,23 +58,25 @@
             </#list>
         </div>
 
-        <div class="d-flex justify-content-between w-50 mx-auto">
-            <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
-                <#if page!=1>
-                    <a class="pageButton" style="color: black; text-align: center" href="?page=${page-1}"><<</a>
-                </#if>
+        <#if 1<lastPage>
+            <div class="d-flex justify-content-between w-50 mx-auto">
+                <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
+                    <#if page!=1>
+                        <a class="pageButton" style="color: black; text-align: center" href="?page=${page-1}"><<</a>
+                    </#if>
+                </div>
+                <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
+                    <#list 1..pages as x>
+                        <a class="pageButton" style="color: black; text-align: center" href="?page=${x}">${x}</a>
+                    </#list>
+                </div>
+                <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
+                    <#if lastPage != page>
+                        <a class="pageButton" style="color: black; text-align: center" href="?page=${page+1}">>></a>
+                    </#if>
+                </div>
             </div>
-            <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
-                <#list 1..pages as x>
-                    <a class="pageButton" style="color: black; text-align: center" href="?page=${x}">${x}</a>
-                </#list>
-            </div>
-            <div class="justify-content-center w-50 mx-auto" style="padding: 10px">
-                <#if lastPage != page>
-                    <a class="pageButton" style="color: black; text-align: center" href="?page=${page+1}">>></a>
-                </#if>
-            </div>
-        </div>
+        </#if>
     </div>
 
 </@main.renderWith>

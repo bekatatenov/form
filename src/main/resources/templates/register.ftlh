@@ -1,28 +1,30 @@
-<#import "partials/main.ftlh" as main />
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Sishi bar</title>
+</head>
+<body>
 
-<@main.renderWith scripts=["/js/main.js"] styles=[]>
-
-    <div class="login-form">
-
-
-        <form action="/register" method="post"  class="w-25 mx-auto">
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" action="/register" method="post">
             <#if _csrf??>
                 <input type="hidden" name="${(_csrf.parameterName)!'csrf'}" value="${(_csrf.token)!'--no-token--'}"/>
             </#if>
-            <h2 class="text-center">Register</h2>
-
-            <div class="form-group">
-                <input type="text" class="form-control" name = "email" value="${(form.email)!''}" placeholder="Username" required="required">
-            </div>
-            <div class="form-group">
-                <input type="password" name ="password" class="form-control" value="" placeholder="Password" required="required">
-            </div>
-            <div class="form-group justify-content-center">
-                <button type="submit" class="btn btn-dark btn-block" style="margin-left: 143px;">Register</button>
-            </div>
-
+            <input type="text" name="name" placeholder="Your-name" value="${(form.name)!''}">
+            <input type="text" name="email" placeholder=Your-Email" value="${(form.email)!''}">
+            <input type="text" name="password" placeholder=You-Password"value="">
+            <button>create</button>
+            <p class="message">Registered? <a href="/login">LogIn</a></p>
+            <p class="message">"MainPage>? <a href="/">MainPage</a></p>
         </form>
-        <p class="text-center"><a href="/login">LogIn</a></p>
     </div>
-
-</@main.renderWith>
+</div>
+<script src="/js/login.js"></script>
+</body>
+</html>

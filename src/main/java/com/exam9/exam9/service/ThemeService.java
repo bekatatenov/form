@@ -15,4 +15,9 @@ public class ThemeService {
     public Page<Theme> findAllThemes(Pageable pageable) {
         return themeRepository.findAll(pageable);
     }
+
+    public void save(Theme theme) {
+        themeRepository.save(theme);
+    }
+
 }

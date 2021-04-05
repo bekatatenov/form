@@ -1,0 +1,80 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../fonts/14362.ttf);
+}
+
+.body {
+    background-image: url("../images/back.jpeg");
+}
+
+.header {
+    padding: 30px 0px;
+    background: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.logo {
+    padding-top: 30px;
+}
+
+.logo :hover {
+    width: 176px;
+    height: 115px;
+}
+
+.cities {
+    font-size: 40px;
+    font-family: myFirstFont, serif;
+    color: #e30016;
+}
+
+.tel {
+    font-family: "Georgia";
+}
+
+.tel a {
+    text-decoration: none;
+    color: #7f6535;
+}
+
+.code {
+    font-size: 15px;
+}
+
+.number {
+    font-size: 40px;
+}
+
+.number a {
+    color: #e30016;
+}
+
+.tel-head {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.icon {
+    font-size: 30px;
+    padding-left: 10px;
+}
+
+.icon a {
+    color: mediumseagreen;
+}
+
+.code a:hover {
+    font-size: 30px;
+}
+
+.icon a :hover {
+    font-size: 30px;
+}
+
+.city :hover {
+    color: black;
+}
